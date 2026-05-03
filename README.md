@@ -146,14 +146,16 @@ Test transaction submitted on the Stellar Testnet as proof of blockchain integra
 | | |
 |---|---|
 | **Network** | Stellar Testnet |
-| **Transaction Hash** | `— will be added —` |
-| **Explorer** | [View on Stellar Expert](https://stellar.expert/explorer/testnet/tx/) |
+| **Transaction Hash** | `4cd62f96a8ac4419a2e48cff4bb26e1dfa5e10acbd58af926b854b57d3f12c60` |
+| **Explorer** | [View on Stellar Expert](https://stellar.expert/explorer/testnet/tx/4cd62f96a8ac4419a2e48cff4bb26e1dfa5e10acbd58af926b854b57d3f12c60) |
 
 ---
 
 ## Screenshots
 
-<!-- Project screenshots will be added here -->
+![Ekran Görüntüsü 1](photo/Ekran%20görüntüsü%202026-05-03%20180946.png)
+
+![Ekran Görüntüsü 2](photo/Ekran%20görüntüsü%202026-05-03%20181001.png)
 
 ---
 
