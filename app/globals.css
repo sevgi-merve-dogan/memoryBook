@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+
+body {
+  font-family: Georgia, serif;
+  background: linear-gradient(145deg, #f2f0ec 0%, #e8e4de 50%, #ede9e3 100%);
+  min-height: 100vh;
+}
+
+.book-flip {
+  box-shadow:
+    0 28px 72px rgba(0,0,0,0.28),
+    0 8px 24px rgba(0,0,0,0.16),
+    0 2px 6px rgba(0,0,0,0.08);
+}
+
+.page-wrapper {
+  background: #faf8f5;
+  overflow: hidden;
+  position: relative;
+}
+
+textarea::placeholder { color: rgba(100,90,80,0.3); }
+textarea::-webkit-scrollbar { width: 3px; }
+textarea::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 2px; }
+audio { accent-color: #5a6476; }
+
+.toolbar-btn {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 6px 12px; border-radius: 8px; border: none; cursor: pointer;
+  background: transparent; transition: background 0.15s;
+  font-size: 10px; color: #6a6460; white-space: nowrap;
+}
+.toolbar-btn:hover { background: rgba(0,0,0,0.06); }
+.toolbar-btn.active { background: rgba(0,0,0,0.1); color: #2c2a27; }
