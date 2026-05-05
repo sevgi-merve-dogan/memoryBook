@@ -130,7 +130,13 @@ interface StoreContextValue {
   diary: Diary;
   currentPage: number;
   editMode: EditMode;
+  requestedBookPage: number | null;
+  setRequestedBookPage: (p: number | null) => void;
   walletAddress: string | null;
+  profileUsername: string | null;
+  profilePhotoUrl: string | null;
+  setProfileUsername: (name: string | null) => void;
+  setProfilePhotoUrl: (url: string | null) => void;
   pendingEmoji: string | null;
   deleteQuota: number;
   photoQuota: number;
@@ -215,6 +221,27 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
     if (typeof window !== 'undefined') return localStorage.getItem('ani-wallet') || null;
     return null;
   });
+  const [profileUsername, setProfileUsernameState] = useState<string | null>(() => {
+    if (typeof window !== 'undefined') return localStorage.getItem('ani-profile-username') || null;
+    return null;
+  });
+  const [profilePhotoUrl, setProfilePhotoUrlState] = useState<string | null>(() => {
+    if (typeof window !== 'undefined') return localStorage.getItem('ani-profile-photo') || null;
+    return null;
+  });
+
+  const setProfileUsername = useCallback((name: string | null) => {
+    setProfileUsernameState(name);
+    if (name) localStorage.setItem('ani-profile-username', name);
+    else localStorage.removeItem('ani-profile-username');
+  }, []);
+
+  const setProfilePhotoUrl = useCallback((url: string | null) => {
+    setProfilePhotoUrlState(url);
+    if (url) localStorage.setItem('ani-profile-photo', url);
+    else localStorage.removeItem('ani-profile-photo');
+  }, []);
+
   const [pendingEmoji, setPendingEmoji] = useState<string | null>(null);
   const [deleteQuota, setDeleteQuota] = useState(() => getDeletionQuota().count);
   const [photoQuota, setPhotoQuota] = useState(() => getPhotoQuota().count);
@@ -236,6 +263,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
   const [filterQuota, setFilterQuota] = useState(() => getFilterQuota().count);
   const [weeklyUnlockQuota, setWeeklyUnlockQuota] = useState(() => getWeeklyUnlockQuota().count);
   const [toast, setToast] = useState<string | null>(null);
+  const [requestedBookPage, setRequestedBookPage] = useState<number | null>(null);
 
   useEffect(() => { localStorage.setItem('ani-defteri-v2', JSON.stringify(diary)); }, [diary]);
   useEffect(() => {
@@ -408,7 +436,9 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
 
   return React.createElement(StoreContext.Provider, {
     value: {
-      diary, currentPage, editMode, walletAddress, pendingEmoji,
+      diary, currentPage, editMode, walletAddress,
+      profileUsername, profilePhotoUrl, setProfileUsername, setProfilePhotoUrl,
+      pendingEmoji,
       deleteQuota, photoQuota, videoAudioQuota,
       showDeleteModal, showMediaModal, pendingMediaType,
       pendingDeleteFn, pendingMediaFn,
@@ -424,6 +454,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
       sessionUnlockedPins, addSessionUnlock,
       filterQuota, weeklyUnlockQuota, useFilterFreeSlot, confirmFreePageUnlock,
       toast, showToast,
+      requestedBookPage, setRequestedBookPage,
       updatePage, addPostIt, updatePostIt, removePostIt,
       addMedia, updateMedia, removeMedia,
       addSticker, updateSticker, removeSticker,

@@ -75,7 +75,7 @@ export async function fundTestnetAccount(address: string): Promise<void> {
 // Shared helper — builds, signs via Freighter v6, submits
 export async function signAndSubmit(
   ownerAddress: string,
-  buildFn: (account: StellarSdk.AccountResponse) => StellarSdk.Transaction
+  buildFn: (account: StellarSdk.Horizon.AccountResponse) => StellarSdk.Transaction
 ): Promise<StellarSdk.Horizon.HorizonApi.SubmitTransactionResponse> {
   const account = await server.loadAccount(ownerAddress);
   const tx = buildFn(account);
